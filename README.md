@@ -1,42 +1,41 @@
-图文博客详解：https://www.jianshu.com/p/2b391df055a9
 > 前面给大家讲过一个借助小程序云开发实现微信支付的，但是那个操作稍微有点繁琐，并且还会经常出现问题，今天就给大家讲一个简单的，并且借助官方支付api实现小程序支付功能。
 
 传送门
 [借助小程序云开发实现小程序支付功能](https://developers.weixin.qq.com/community/develop/article/doc/000ceae09288489c0e9886e6c59c13)
 
 老规矩，先看本节效果图
-![](https://upload-images.jianshu.io/upload_images/6273713-fce2f4ffa8f92d99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWZjZTJmNGZmYThmOTJkOTkucG5n)
 我们实现这个支付功能完全是借助小程序云开发实现的，不用搭建自己的服务器，不用买域名，不用备案域名，不用支持https。只需要一个简单的云函数，就可以轻松的实现微信小程序支付功能。
 核心代码就下面这些
-![](https://upload-images.jianshu.io/upload_images/6273713-7433fba3b792bb28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTc0MzNmYmEzYjc5MmJiMjgucG5n)
 # 一，创建一个云开发小程序
 关于如何创建云开发小程序，这里我就不再做具体讲解。不知道怎么创建云开发小程序的同学，可以去翻看我之前的文章，或者看下我录制的视频：[https://edu.csdn.net/course/play/9604/204528](https://edu.csdn.net/course/play/9604/204528)
 #### 创建云开发小程序有几点注意的
 1，一定不要忘记在app.js里初始化云开发环境。
-![](https://upload-images.jianshu.io/upload_images/6273713-c436567c3368ac74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWM0MzY1NjdjMzM2OGFjNzQucG5n)
 2，创建完云函数后，一定要记得上传
 
 # 二， 创建支付的云函数 
 1，创建云函数pay
-![](https://upload-images.jianshu.io/upload_images/6273713-32302ade305b8a18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTMyMzAyYWRlMzA1YjhhMTgucG5n)
 
-![](https://upload-images.jianshu.io/upload_images/6273713-8ea47ffa0b4cffca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLThlYTQ3ZmZhMGI0Y2ZmY2EucG5n)
 
 # 三，引入三方依赖tenpay
 我们这里引入三方依赖的目的，是创建我们支付时需要的一些参数。我们安装依赖是使用里npm 而npm必须安装node,关于如何安装node，我这里不做讲解，百度一下，网上一大堆。
 #### 1，首先右键pay，然后选择在终端中打开
-![](https://upload-images.jianshu.io/upload_images/6273713-8881030499ebe5ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTg4ODEwMzA0OTllYmU1Y2UucG5n)
 #### 2，我们使用npm来安装这个依赖。
 在命令行里执行  npm i tenpay
-![](https://upload-images.jianshu.io/upload_images/6273713-c61cb1cb5880c475.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](https://upload-images.jianshu.io/upload_images/6273713-cd34c63e39e6427f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](https://upload-images.jianshu.io/upload_images/6273713-768712337485bf67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWM2MWNiMWNiNTg4MGM0NzUucG5n)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWNkMzRjNjNlMzllNjQyN2YucG5n)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTc2ODcxMjMzNzQ4NWJmNjcucG5n)
 安装完成后，我们的pay云函数会多出一个package.json 文件
-![](https://upload-images.jianshu.io/upload_images/6273713-7e9236d8983ebb21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTdlOTIzNmQ4OTgzZWJiMjEucG5n)
 到这里我们的tenpay依赖就安装好了。
 
 # 四，编写云函数pay
-![](https://upload-images.jianshu.io/upload_images/6273713-cd36f9084fada492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWNkMzZmOTA4NGZhZGE0OTIucG5n)
 完整代码如下
 ```
 //云开发实现支付
@@ -75,26 +74,27 @@ exports.main = async(event, context) => {
 ### 一定要注意把appid，mchid，partnerKey换成你自己的。
 到这里我们获取小程序支付所需参数的云函数代码就编写完成了。
 不要忘记上传这个云函数。
-![](https://upload-images.jianshu.io/upload_images/6273713-ba99ca6fe33401ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWJhOTljYTZmZTMzNDAxZWMucG5n)
 出现下图就代表上传成功
-![](https://upload-images.jianshu.io/upload_images/6273713-6133d61bc300dac4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTYxMzNkNjFiYzMwMGRhYzQucG5n)
 
 # 五，写一个简单的页面，用来提交订单，调用pay云函数。
-![](https://upload-images.jianshu.io/upload_images/6273713-ee974aecada48f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWVlOTc0YWVjYWRhNDhmN2MucG5n)
 这个页面很简单，
 1，自己随便编写一个订单号（这个订单号要大于6位）
 2，自己随便填写一个订单价（单位是分）
 3，点击按钮，调用pay云函数。获取支付所需参数。
 
 下图是官方支付api所需要的一些必须参数。
-![](https://upload-images.jianshu.io/upload_images/6273713-2708b7475409199b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTI3MDhiNzQ3NTQwOTE5OWIucG5n)
 下图是我们调用pay云函数获取的参数，和上图所需要的是不是一样。
-![](https://upload-images.jianshu.io/upload_images/6273713-d94c566dd744f128.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![[图片上传中...(WechatIMG9.jpeg-82c1c2-1565617669894-0)]
+](https://upload-images.jianshu.io/upload_images/6273713-d94c566dd744f128.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 # 六，调用wx.requestPayment实现支付
 下图是官方的示例代码
-![](https://upload-images.jianshu.io/upload_images/6273713-00e9315590e4e14c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTAwZTkzMTU1OTBlNGUxNGMucG5n)
 这里不在做具体讲解了，把完整代码给大家贴出来
 ```
 // pages/pay/pay.js
@@ -145,24 +145,22 @@ Page({
 到这里，云开发实现小程序支付的功能就完整实现了。
 # 实现效果
 ### 1，调起支付键盘
-![](https://upload-images.jianshu.io/upload_images/6273713-b20becb49e6fd26e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWIyMGJlY2I0OWU2ZmQyNmUucG5n)
 ### 2，支付完成
-![](https://upload-images.jianshu.io/upload_images/6273713-b2a8266fdc83edc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLWIyYTgyNjZmZGM4M2VkYzMucG5n)
 
 ### 3，log日志，可以看出不同支付状态的回调
-![](https://upload-images.jianshu.io/upload_images/6273713-3a1fca73b650742e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTNhMWZjYTczYjY1MDc0MmUucG5n)
 上图是支付成功的回调，我们可以在支付成功回调时，改变订单支付状态。
 
 下图是支付失败的回调，
-![](https://upload-images.jianshu.io/upload_images/6273713-1b306a9b35b292e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTFiMzA2YTliMzViMjkyZTAucG5n)
 
 下图是支付完成的状态。
-![](https://upload-images.jianshu.io/upload_images/6273713-906f64407be62c4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MjczNzEzLTkwNmY2NDQwN2JlNjJjNGMucG5n)
 
 到这里我们就轻松的实现了微信小程序的支付功能了。是不是很简单啊。
 如果感觉图文不是很好理解，我后面会录制视频讲解。
-
-
 
 
 
